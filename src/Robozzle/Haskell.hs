@@ -15,9 +15,7 @@ levelCompleted :: Int -> [Position] -> [Command] -> Bool
 levelCompleted n ps cs = null (ps \\ take (n + 1) (shipTrail cs))
 
 shipTrail :: [Command] -> [Position]
--- shipTrail "f" = map position [InitialState "f", nextState (InitialState "f")]
-shipTrail "f" = map position (iterate nextState (InitialState "f"))
-shipTrail "" = map position [InitialState ""]
+shipTrail cs = map position (iterate nextState (InitialState cs))
 
 position :: ShipState -> Position
 position (InitialState _) = (0,0)

@@ -25,6 +25,11 @@ spec = do
       nextState (ShipState (0,1) (0,12) "ff") `shouldBe` ShipState (0,1) (0,13) "f"
       nextState (ShipState (0,-1) (0,12) "ff") `shouldBe` ShipState (0,-1) (0,11) "f"
       nextState (ShipState (-1,0) (8,9) "f") `shouldBe` ShipState (-1,0) (7,9) ""
+    it "should turn" $ do
+      nextState (ShipState (0,1) (0,0) "rrff") `shouldBe` ShipState (1,0) (0,0) "rff"
+      nextState (ShipState (1,0) (0,0) "rrff") `shouldBe` ShipState (0,-1) (0,0) "rff"
+      nextState (ShipState (0,1) (0,0) "llff") `shouldBe` ShipState (-1,0) (0,0) "lff"
+      nextState (ShipState (-1,0) (0,0) "llff") `shouldBe` ShipState (0,-1) (0,0) "lff"
 
 -- spec :: Spec
 -- spec =

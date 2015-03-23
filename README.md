@@ -16,10 +16,10 @@ Some notes of what I've observed:
 
 ## Installation
 
-cabal sandbox init
-cabal install hspec
-cabal configure --enable-tests && cabal build
+        cabal sandbox init
+        cabal install hspec
+        cabal configure --enable-tests && cabal build
 
 ## Usage
 
-cabal test
+        cabal test

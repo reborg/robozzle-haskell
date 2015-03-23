@@ -9,7 +9,6 @@ type Command = Char
 
 levelCompleted :: Int -> [Position] -> [Command] -> Bool
 levelCompleted _ ps cs = null (ps \\ shipTrail cs)
-levelCompleted _ ps cs = null (ps \\ shipTrail cs)
 
 shipTrail :: [Command] -> [Position]
 shipTrail "f" = [(0,0),(0,1)]

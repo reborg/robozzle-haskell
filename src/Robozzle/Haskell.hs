@@ -15,7 +15,7 @@ levelCompleted n ps cs = null (ps \\ take (n + 1) (shipTrail cs))
 shipTrail :: [Command] -> [Position]
 -- shipTrail "f" = [(0,0),(0,1)]
 shipTrail "f" = map position [ShipState (0,1) (0,0) "f", ShipState (0,1) (0,1) ""]
-shipTrail "" = [(0,0)]
+shipTrail "" = map position [ShipState (0,1) (0,0) ""]
 
 position :: ShipState -> Position
 position (ShipState _ p _) = p

@@ -39,4 +39,5 @@ nextState s = s
 - creates type alias and structured data at will (much easier for wishful programming than clj)
 - sometimes working on abstractions, like from pairs to mapping positions, or nextState given another state
 - refactoring: hierarchical fn calls are mutated into composition and partial application to remove parenth
+- refactoring: multiple pattern matching on same thing can be made a conditional single pattern matching
 -}

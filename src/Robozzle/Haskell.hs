@@ -14,12 +14,16 @@ levelCompleted :: Int -> [Position] -> [Command] -> Bool
 levelCompleted n ps cs = null (ps \\ take (n + 1) (shipTrail cs))
 
 shipTrail :: [Command] -> [Position]
-shipTrail "f" = map position [InitialState "f", ShipState (0,1) (0,1) ""]
+-- shipTrail "f" = map position [InitialState "f", ShipState (0,1) (0,1) ""]
+shipTrail "f" = map position [InitialState "f", nextState (InitialState "f")]
 shipTrail "" = map position [InitialState ""]
 
 position :: ShipState -> Position
 position (InitialState _) = (0,0)
 position (ShipState _ p _) = p
+
+nextState :: ShipState -> ShipState
+nextState (InitialState "f") = ShipState (0,1) (0,1) ""
 
 {-
 - take aways so far:
@@ -27,5 +31,7 @@ position (ShipState _ p _) = p
 - pattern match are used from the most general _ matchall
 - 'fake' _ matchall are then gradually removed, test by test, accounting for more conditions
 - implementation is removing "constants" that are only good during initial phase
+- extract function always use pattern match constant for place where it was extracted from
 - creates type alias and structured data at will (much easier for wishful programming than clj)
+- sometimes working on abstractions, like from pairs to mapping positions, or nextState given another state
 -}

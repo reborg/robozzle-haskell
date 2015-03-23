@@ -7,7 +7,7 @@ main :: IO ()
 main = hspec spec
 
 spec :: Spec
-spec =
+spec = do
   describe "basic facts" $ do
     it "if ship lies on only star, then it passes" $
       levelCompleted 0 [(0, 0)] "" `shouldBe` True
@@ -17,6 +17,9 @@ spec =
       levelCompleted 1 [(0, 1)] "f" `shouldBe` True
     it "if the ship moves but max number of moves is not achieved then fail" $
       levelCompleted 0 [(0, 1)] "f" `shouldBe` False
+  describe "state computation" $ do
+    it "return same state if no command left to execute" $
+      nextState (ShipState (0,1) (0,0) "") `shouldBe` ShipState (0,1) (0,0) ""
 
 -- spec :: Spec
 -- spec =

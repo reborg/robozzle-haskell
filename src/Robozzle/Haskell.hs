@@ -6,6 +6,7 @@ import Data.List
 
 data ShipState = ShipState Direction Position [Command]   -- this is a constructor def
                | InitialState [Command]                   -- and another one
+               deriving (Eq, Show)                        -- by deriving we get the "show" feature and comparison
 type Direction = (Int, Int)
 type Position = (Int, Int)
 type Command = Char
@@ -14,8 +15,8 @@ levelCompleted :: Int -> [Position] -> [Command] -> Bool
 levelCompleted n ps cs = null (ps \\ take (n + 1) (shipTrail cs))
 
 shipTrail :: [Command] -> [Position]
--- shipTrail "f" = map position [InitialState "f", ShipState (0,1) (0,1) ""]
-shipTrail "f" = map position [InitialState "f", nextState (InitialState "f")]
+-- shipTrail "f" = map position [InitialState "f", nextState (InitialState "f")]
+shipTrail "f" = map position (iterate nextState (InitialState "f"))
 shipTrail "" = map position [InitialState ""]
 
 position :: ShipState -> Position
@@ -24,6 +25,7 @@ position (ShipState _ p _) = p
 
 nextState :: ShipState -> ShipState
 nextState (InitialState "f") = ShipState (0,1) (0,1) ""
+nextState s = s
 
 {-
 - take aways so far:

@@ -8,13 +8,15 @@ main = hspec spec
 
 spec :: Spec
 spec =
-  describe "what instead we can do is here" $ do
+  describe "basic facts" $ do
     it "if ship lies on only star, then it passes" $
       levelCompleted 0 [(0, 0)] "" `shouldBe` True
     it "if ship is somewhere else not on top of a star, it fails" $
       levelCompleted 1 [(0, 1)] "" `shouldBe` False
     it "if the ship moves then level completed" $
       levelCompleted 1 [(0, 1)] "f" `shouldBe` True
+    it "if the ship moves but max number of moves is not achieved then fail" $
+      levelCompleted 0 [(0, 1)] "f" `shouldBe` False
 
 -- spec :: Spec
 -- spec =

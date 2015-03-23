@@ -15,9 +15,6 @@ levelCompleted :: Int -> [Position] -> [Command] -> Bool
 levelCompleted n ps cs = null (ps \\ take (n + 1) (shipTrail cs))
 
 shipTrail :: [Command] -> [Position]
--- original: shipTrail cs = map position (iterate nextState (InitialState cs))
--- 1. shipTrail cs = ((map position) . (iterate nextState) . InitialState) cs -- in clj you would need explicit partial call
--- 2. shipTrail = (map position) . (iterate nextState) . InitialState -- we can make this a partial
 shipTrail = map position . iterate nextState . InitialState
 
 position :: ShipState -> Position
@@ -26,6 +23,7 @@ position (ShipState _ p _) = p
 
 nextState :: ShipState -> ShipState
 nextState (InitialState "f") = ShipState (0,1) (0,1) ""
+nextState (ShipState _ (_,y) _) = ShipState (0,1) (0,(y + 1)) ""
 nextState s = s
 
 {-

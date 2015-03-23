@@ -20,6 +20,8 @@ spec = do
   describe "state computation" $ do
     it "return same state if no command left to execute" $
       nextState (ShipState (0,1) (0,0) "") `shouldBe` ShipState (0,1) (0,0) ""
+    it "should move forward one step" $
+      nextState (ShipState (0,1) (0,12) "f") `shouldBe` ShipState (0,1) (0,13) ""
 
 -- spec :: Spec
 -- spec =

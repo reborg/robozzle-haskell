@@ -15,7 +15,10 @@ levelCompleted :: Int -> [Position] -> [Command] -> Bool
 levelCompleted n ps cs = null (ps \\ take (n + 1) (shipTrail cs))
 
 shipTrail :: [Command] -> [Position]
-shipTrail cs = map position (iterate nextState (InitialState cs))
+-- original: shipTrail cs = map position (iterate nextState (InitialState cs))
+-- 1. shipTrail cs = ((map position) . (iterate nextState) . InitialState) cs -- in clj you would need explicit partial call
+-- 2. shipTrail = (map position) . (iterate nextState) . InitialState -- we can make this a partial
+shipTrail = map position . iterate nextState . InitialState
 
 position :: ShipState -> Position
 position (InitialState _) = (0,0)
@@ -34,4 +37,5 @@ nextState s = s
 - extract function always use pattern match constant for place where it was extracted from
 - creates type alias and structured data at will (much easier for wishful programming than clj)
 - sometimes working on abstractions, like from pairs to mapping positions, or nextState given another state
+- refactoring: hierarchical fn calls are mutated into composition and partial application to remove parenth
 -}

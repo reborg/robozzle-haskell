@@ -18,8 +18,9 @@ spec = do
     it "if the ship moves but max number of moves is not achieved then fail" $
       levelCompleted 0 [(0, 1)] "f" `shouldBe` False
   describe "state computation" $ do
-    it "return same state if no command left to execute" $
+    it "return same state if no command left to execute" $ do
       nextState (ShipState (0,1) (0,0) "") `shouldBe` ShipState (0,1) (0,0) ""
+      nextState (InitialState "rlfff") `shouldBe` ShipState (1,0) (0,0) "lfff"
     it "should move forward " $ do
       nextState (ShipState (0,1) (0,12) "f") `shouldBe` ShipState (0,1) (0,13) ""
       nextState (ShipState (0,1) (0,12) "ff") `shouldBe` ShipState (0,1) (0,13) "f"

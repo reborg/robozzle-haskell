@@ -23,9 +23,10 @@ position (ShipState _ p _) = p
 
 nextState :: ShipState -> ShipState
 nextState (InitialState cs) = nextState (ShipState (0,1) (0,0) cs)
-nextState (ShipState (dx,dy) (x,y) ('f':cs)) = ShipState (dx,dy) ((x + dx),(y + dy)) cs
-nextState (ShipState (dx,dy) (x,y) ('r':cs)) = ShipState (dy,-dx) ((x),(y)) cs
-nextState (ShipState (dx,dy) (x,y) ('l':cs)) = ShipState (-dy,dx) ((x),(y)) cs
+nextState (ShipState (dx,dy) (x,y) (c:cs))
+  | c == 'f' = ShipState (dx,dy) ((x + dx),(y + dy)) cs
+  | c == 'r' = ShipState (dy,-dx) ((x),(y)) cs
+  | c == 'l' = ShipState (-dy,dx) ((x),(y)) cs
 nextState s = s
 
 {-
